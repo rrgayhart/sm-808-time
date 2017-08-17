@@ -2,6 +2,14 @@
 
 [Link to Original Requirements](https://github.com/splicers/sm-808)
 
+## Local Development
+
+`npm install`
+
+`npm test`
+
+`npm start`
+
 ### Requirements
 
 - User can input

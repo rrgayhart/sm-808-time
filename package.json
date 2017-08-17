@@ -1,0 +1,32 @@
+{
+  "name": "sm-808-time",
+  "version": "1.0.0",
+  "description": "808 Code Challenge",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "mocha ./tests/index.js || true",
+    "lint": "eslint index.js lib/.",
+    "lintf": "eslint index.js lib/. --fix"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rrgayhart/sm-808-time.git"
+  },
+  "keywords": [
+    "drum",
+    "machine",
+    "commandline",
+    "fun"
+  ],
+  "author": "Romeeka Gayhart <rrgayhart@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/rrgayhart/sm-808-time/issues"
+  },
+  "homepage": "https://github.com/rrgayhart/sm-808-time#readme",
+  "devDependencies": {
+    "chai": "^4.1.1",
+    "mocha": "^3.5.0"
+  }
+}
