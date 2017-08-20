@@ -4,10 +4,10 @@
   "description": "808 Code Challenge",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
+    "start": "node commandline/index.js",
     "test": "mocha ./tests/index.js || true",
-    "lint": "eslint index.js lib/.",
-    "lintf": "eslint index.js lib/. --fix"
+    "lint": "eslint index.js lib/. commandline/. tests/. || true",
+    "lintf": "eslint index.js lib/. commandline/. tests/. --fix"
   },
   "repository": {
     "type": "git",
