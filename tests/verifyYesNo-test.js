@@ -9,7 +9,8 @@ describe('verifyYesNo', function () {
       'yes',
       'YES',
       'YeS',
-      'Y '
+      'Y ',
+      '(y)'
     ]
     possibleYesResponses.forEach(function(resp){
       expect(verifyYesNo(resp)).to.eq(true, ('Failed on ' + resp));
