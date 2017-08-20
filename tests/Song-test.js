@@ -72,24 +72,24 @@ describe('Song', function () {
     it('should delete pattern by name', function () {
       var result = this.subject.deletePattern('snare');
       expect(result).to.eq(true);
-      expect(this.subject.patterns.keys).to.deep.eq(['kick', 'hihat']);
-      expect(this.subject.play).to.eq('');
+      expect(Object.keys(this.subject.patterns)).to.deep.eq(['kick', 'hihat']);
+      expect(this.subject.play()).to.eq('kick|.|hihat|.|kick|.|hihat|.');
       result = this.subject.deletePattern('kick');
       expect(result).to.eq(true);
-      expect(this.subject.patterns.keys).to.deep.eq(['hihat']);
-      expect(this.subject.play).to.eq('');
-      this.subject.deletePattern('gorgonzola');
+      expect(Object.keys(this.subject.patterns)).to.deep.eq(['hihat']);
+      expect(this.subject.play()).to.eq('.|.|hihat|.|.|.|hihat|.');
+      result = this.subject.deletePattern('gorgonzola');
       expect(result).to.eq(false);
-      expect(this.subject.patterns.keys).to.deep.eq(['hihat']);
-      expect(this.subject.play).to.eq('');
+      expect(Object.keys(this.subject.patterns)).to.deep.eq(['hihat']);
+      expect(this.subject.play()).to.eq('.|.|hihat|.|.|.|hihat|.');
       result = this.subject.deletePattern('hihat');
       expect(result).to.eq(true);
-      expect(this.subject.patterns.keys).to.deep.eq([]);
-      expect(this.subject.play).to.eq('');
+      expect(Object.keys(this.subject.patterns)).to.deep.eq([]);
+      expect(this.subject.play()).to.eq('');
       result = this.subject.deletePattern('hihat');
       expect(result).to.eq(false);
-      expect(this.subject.patterns.keys).to.deep.eq([]);
-      expect(this.subject.play).to.eq('');
+      expect(Object.keys(this.subject.patterns)).to.deep.eq([]);
+      expect(this.subject.play()).to.eq('');
     });
   });
 
