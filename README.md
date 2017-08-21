@@ -48,4 +48,4 @@ The [heartbeats](https://github.com/arjunmehta/heartbeats) repo was a helpful re
 
 ## Patterns pad up to 8, 16 or 32
 
-![showing paddern padding](sm-808-time/docs/error-padding.png?raw=true )
+![showing paddern padding](https://github.com/rrgayhart/sm-808-time/raw/master/docs/error-padding.png?raw=true )
