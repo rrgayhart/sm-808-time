@@ -36,16 +36,16 @@ The [heartbeats](https://github.com/arjunmehta/heartbeats) repo was a helpful re
 
 ## Creating a New Song
 
-![new song](sm-808-time/docs/new.png)
+![new song](sm-808-time/docs/new.png?raw=true )
 
 ## Using a Sample Song
 
-![sample song](sm-808-time/docs/sample.png)
+![sample song](sm-808-time/docs/sample.png?raw=true )
 
 ## Warning Messages
 
-![warning](sm-808-time/docs/warning.png)
+![warning](sm-808-time/docs/warning.png?raw=true )
 
 ## Patterns pad up to 8, 16 or 32
 
-![showing paddern padding](sm-808-time/docs/error-padding.png)
+![showing paddern padding](sm-808-time/docs/error-padding.png?raw=true )
