@@ -2,6 +2,7 @@ var readline = require('readline');
 var Song = require('../lib/Song.js');
 var styleOutput = require('./styleOutput.js');
 var verifyYesNo = require('./verifyYesNo.js');
+var sampleSong = require('./sampleSong.js');
 
 var PROMPT = '> ';
 var rl = readline.createInterface({
@@ -22,9 +23,23 @@ var song;
 welcomeOutput();
 
 function welcomeOutput() {
-  var welcome = styleOutput('Welcome to the SM 808 Time', bannerC);
+  var welcome = styleOutput('Welcome to the SM 808 Time\n', bannerC);
   console.log(welcome);
-  createSong();
+  var promptText = ('Press [enter] to create a new song');
+  var additionalDetails = (['or type ',
+    styleOutput('(s)', detailC),
+    'ample to use a demo song.'
+  ].join(''));
+  promptInformation(promptText, createOrDefault, additionalDetails);
+}
+
+function createOrDefault(answer) {
+  if (/^s(ample)*$/i.test(answer)) {
+    song = sampleSong;
+    promptMajorOptions();
+  } else {
+    createSong();
+  }
 }
 
 function createSong() {
@@ -131,13 +146,13 @@ function addPattern(data) {
 function promptMajorOptions() {
   var promptText = [
     styleOutput('Would you like to:', promptC),
-    '\n ',
-    styleOutput('(a)', detailC),
-    'dd another pattern\n ',
-    styleOutput('(d)', detailC),
-    'elete a pattern\n ',
-    styleOutput('(p)', detailC),
+    '\n',
+    styleOutput(' (p)', detailC),
     'lay the entire song\n',
+    styleOutput(' (a)', detailC),
+    'dd another pattern\n',
+    styleOutput(' (d)', detailC),
+    'elete a pattern\n',
     ' change ',
     styleOutput('(b)', detailC),
     'pm\n',
