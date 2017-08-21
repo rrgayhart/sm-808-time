@@ -1,53 +1,33 @@
 # sm-808-time
 
+A CLI drum machine written in JavaScript.
+
 [Link to Original Requirements](https://github.com/splicers/sm-808)
 
-## Local Development
+## Running Locally
 
-`npm install`
+- Pull down this repository: `git clone git@github.com:rrgayhart/sm-808-time.git`
+- Install dependencies: `npm install`
+- To run the script: `npm start`
+- To run the tests: `npm test`
+- To run the linter: `npm run lint` or `npm run lintf` (note: you will need [eslint](https://www.npmjs.com/package/eslint) installed globally)
 
-`npm test`
+## Implementation Notes
 
-`npm start`
+In an effort to limit dependencies, the following tools were used:
 
-### Requirements
+- [Node.js](https://nodejs.org/en/)
+- [npm](https://www.npmjs.com) for package management
+- [mocha](https://www.npmjs.com/package/mocha) for testing
+- [chai](https://www.npmjs.com/package/chai) for testing assertions
+- [eslint](https://www.npmjs.com/package/eslint) during development
 
-- User can input
-  - Song title (e.g. Animal Rights)
-  - Beats Per Minute (e.g. 128)
-
-- User can add patterns
-  - In the example given:
-    - `song <- Kick   |X|_|_|_|X|_|_|_|`
-    - `song <- Snare  |_|_|_|_|X|_|_|_|`
-    - `song <- HiHat  |_|_|X|_|_|_|X|_|`
-
-- User can ask the song to play
-
-- Generate a real time visual representation of the sequence being played
-  - audio not required
-
-```
-Playing song at BPM: 128...
-|kick|_|hithat|_|kick+snare|_|hithat|_|
-...
-```
-- A song contains multiple patterns being sequenced for different samples.
-
-- A song plays at a given tempo (AKA bpm), the tempo does not need to be able change while the song plays.
-
-- For this exercise, you are expected to implement 3 patterns for the following sounds/samples: kick, snare and hihat (you can use the example pattern or come up with your own).
-
-- The time signature is expected to be 4/4 (if you don't know what that is, don't worry and ignore this instruction).
-
-- The pattern is expected to be 8 steps or more.
-
-- Your code will be executed on the command line or in the browser.
-
-- Try to keep external dependencies to a minimum.
-
-- The output isn't expected to be in sync with the tempo/BPM (bonus points if you manage to do it).
+JavaScript ES5 syntax was used so as to not introduce [Babel](https://babeljs.io/)
 
 ## Resources Used
 
+[The Original Requirements](https://github.com/splicers/sm-808) contained many helpful tips - including an interval calculation that was referenced.
+
 Colors used in the commandline interface were pulled from [bodi0's](https://stackoverflow.com/users/632524/bodi0) [Stack Overflow response](https://stackoverflow.com/questions/9781218/how-to-change-node-jss-console-font-color)
+
+The [heartbeats](https://github.com/arjunmehta/heartbeats) repo was a helpful reference for thinking about creating a pulse in node!
