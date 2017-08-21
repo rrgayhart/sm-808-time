@@ -250,10 +250,10 @@ function playSong(loop) {
 }
 
 function runSongInterval(loopData) {
-  var interval = ((1000 * 60) / song.bpm);
   var stanza = song.play();
+  var loop = loopData ? 4 * loopData : 4;
+  var interval = ((((60) / song.bpm) * 4) / stanza.length) * 1000;
   var counter = 0;
-  var loop = loopData || 1;
   var timer = setInterval(function () {
     if (loop <= 0) { return endSongPlay(timer); }
     rl.write(stanza[counter]);
@@ -270,6 +270,7 @@ function runSongInterval(loopData) {
 
 function endSongPlay(timer) {
   clearInterval(timer);
+  console.log(styleOutput('\n---------\n', bannerC));
   promptMajorOptions();
 }
 
