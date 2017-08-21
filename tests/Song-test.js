@@ -41,41 +41,59 @@ describe('Song', function () {
     });
   });
 
-  describe('cleanPattern', function () {
+  describe('validatePattern', function () {
     context('when pattern is an acceptable pattern length', function () {
       it('handles a pattern of 8 beats', function () {
-        var clap = {name: 'clap', pattern: '.x...x..'};
-        var result = this.subject.cleanPattern(clap);
-        expect(result).to.eq(clap);
+        var pattern = '.x...x..';
+        var result = this.subject.validatePattern(pattern);
+        expect(result).to.eq(pattern);
       });
 
       it('handles a pattern of 16 beats', function () {
-        var clap = {name: 'clap', pattern: '...............x'};
-        var result = this.subject.cleanPattern(clap);
-        expect(result).to.eq(clap);
+        var pattern = '...............x';
+        var result = this.subject.validatePattern(pattern);
+        expect(result).to.eq(pattern);
       });
 
       it('handles a pattern of 32 beats', function () {
-        var clap = {name: 'clap', pattern: '...x...........x...x...........x'};
-        var result = this.subject.cleanPattern(clap);
-        expect(result).to.eq(clap);
+        var pattern = '...x...........x...x...........x';
+        var result = this.subject.validatePattern(pattern);
+        expect(result).to.eq(pattern);
       });
     });
 
     context('when pattern is under acceptable length', function () {
       it('pads pattern to nearest acceptable length', function () {
-        var five = {name: 'kick', pattern: '..xxx'};
-        var seventeen = {name: 'highhat', pattern: '..x..x....x..x.xx'};
-        expect(this.subject.cleanPattern(five).pattern).to.eq('..xxx...');
-        expect(this.subject.cleanPattern(seventeen).pattern).to.eq('..x..x....x..x.xx...............');
+        var five = '..xxx';
+        var seventeen = '..x..x....x..x.xx';
+        expect(this.subject.validatePattern(five)).to.eq('..xxx...');
+        expect(this.subject.validatePattern(seventeen)).to.eq('..x..x....x..x.xx...............');
       });
     });
 
     context('when pattern is over max length', function () {
       it('it cuts to the max length', function () {
-        var forty = {name: 'highhat', pattern: '..x..x....x..x.xx..x..x....x..x.xx..x..x'};
+        var forty = '..x..x....x..x.xx..x..x....x..x.xx..x..x';
         var expectedResult = '..x..x....x..x.xx..x..x....x..x.';
-        expect(this.subject.cleanPattern(forty).pattern).to.eq(expectedResult);
+        expect(this.subject.validatePattern(forty)).to.eq(expectedResult);
+      });
+    });
+
+    context('when pattern does not contain correct chars', function () {
+      it('removes any chars other than x or .', function () {
+        var pattern = 'xx..2';
+        var result = this.subject.validatePattern(pattern);
+        expect(result).to.eq('xx......');
+      });
+
+      it('throws no valid pattern when all non pattern chars present', function () {
+        var pattern = 'fsefsd';
+        expect(this.subject.validatePattern.bind(null, pattern)).to.throw(TypeError, /No Valid Pattern Characters/);
+      });
+
+      it('throws no valid pattern when empty string', function () {
+        var pattern = '';
+        expect(this.subject.validatePattern.bind(null, pattern)).to.throw(TypeError, /No Valid Pattern Characters/);
       });
     });
   });
@@ -104,23 +122,23 @@ describe('Song', function () {
       var result = this.subject.deletePattern('snare');
       expect(result).to.eq(true);
       expect(Object.keys(this.subject.patterns)).to.deep.eq(['kick', 'hihat']);
-      expect(this.subject.play()).to.eq('kick|.|hihat|.|kick|.|hihat|.');
+      expect(this.subject.play()).to.deep.eq(['kick', '.', 'hihat', '.', 'kick', '.', 'hihat', '.']);
       result = this.subject.deletePattern('kick');
       expect(result).to.eq(true);
       expect(Object.keys(this.subject.patterns)).to.deep.eq(['hihat']);
-      expect(this.subject.play()).to.eq('.|.|hihat|.|.|.|hihat|.');
+      expect(this.subject.play()).to.deep.eq(['.', '.', 'hihat', '.', '.', '.', 'hihat', '.']);
       result = this.subject.deletePattern('gorgonzola');
       expect(result).to.eq(false);
       expect(Object.keys(this.subject.patterns)).to.deep.eq(['hihat']);
-      expect(this.subject.play()).to.eq('.|.|hihat|.|.|.|hihat|.');
+      expect(this.subject.play()).to.deep.eq(['.', '.', 'hihat', '.', '.', '.', 'hihat', '.']);
       result = this.subject.deletePattern('hihat');
       expect(result).to.eq(true);
       expect(Object.keys(this.subject.patterns)).to.deep.eq([]);
-      expect(this.subject.play()).to.eq('');
+      expect(this.subject.play()).to.deep.eq([]);
       result = this.subject.deletePattern('hihat');
       expect(result).to.eq(false);
       expect(Object.keys(this.subject.patterns)).to.deep.eq([]);
-      expect(this.subject.play()).to.eq('');
+      expect(this.subject.play()).to.deep.eq([]);
     });
   });
 
@@ -137,29 +155,29 @@ describe('Song', function () {
 
       it('returns a song composed of patterns', function () {
         var result = this.subject.play();
-        expect(result).to.eq('kick|.|hihat|.|kick+snare|.|hihat|.');
+        expect(result).to.deep.eq(['kick', '.', 'hihat', '.', 'kick+snare', '.', 'hihat', '.']);
       });
 
       it('repeats patterns to match longest pattern', function () {
         var clap = { name: 'clap', pattern: '...............x'};
         this.subject.addPattern(clap);
         var result = this.subject.play();
-        var expected = 'kick|.|hihat|.|kick+snare|.|hihat|.|kick|.|hihat|.|kick+snare|.|hihat|clap';
-        expect(result).to.eq(expected);
+        var expected = ['kick', '.', 'hihat', '.', 'kick+snare', '.', 'hihat', '.', 'kick', '.', 'hihat', '.', 'kick+snare', '.', 'hihat', 'clap'];
+        expect(result).to.deep.eq(expected);
       });
 
       it('does not infinitely loop on an empty pattern', function () {
         var hihat = { name: 'clap', pattern: '' };
         this.subject.addPattern(hihat);
         var result = this.subject.play();
-        expect(result).to.eq('kick|.|hihat|.|kick+snare|.|hihat|.');
+        expect(result).to.deep.eq(['kick', '.', 'hihat', '.', 'kick+snare', '.', 'hihat', '.']);
       });
     });
 
     context('without patterns', function () {
       it('returns an empty string', function () {
         var result = this.subject.play();
-        expect(result).to.eq('');
+        expect(result).to.deep.eq([]);
       });
     });
   });
