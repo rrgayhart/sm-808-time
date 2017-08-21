@@ -3,6 +3,8 @@ var styles = {
   cyan: '\x1b[1;36m',
   yellow: '\x1b[33m',
   red: '\x1b[31m',
+  magenta: '\x1b[35m',
+  green: '\x1b[32m',
   underscore: '\x1b[4m',
   dim: '\x1b[2m',
   bright: '\x1b[1m',
