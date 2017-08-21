@@ -11,13 +11,13 @@ describe('verifyYesNo', function () {
       'YeS',
       'Y ',
       '(y)'
-    ]
-    possibleYesResponses.forEach(function(resp){
+    ];
+    possibleYesResponses.forEach(function (resp) {
       expect(verifyYesNo(resp)).to.eq(true, ('Failed on ' + resp));
     });
   });
 
-  it('should return false for a no or no-like response', function(){
+  it('should return false for a no or no-like response', function () {
     var possibleNoResponses = [
       'n',
       'N',
@@ -25,8 +25,8 @@ describe('verifyYesNo', function () {
       'asdfsesd',
       'y a x',
       'noyes'
-    ]
-    possibleNoResponses.forEach(function(resp){
+    ];
+    possibleNoResponses.forEach(function (resp) {
       expect(verifyYesNo(resp)).to.eq(false, ('Failed on ' + resp));
     });
   });
