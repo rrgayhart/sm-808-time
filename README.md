@@ -4,6 +4,8 @@ A CLI drum machine written in JavaScript.
 
 [Link to Original Requirements](https://github.com/splicers/sm-808)
 
+![Gif of CLI running](http://g.recordit.co/palDcZVK3B.gif)
+
 ## Running Locally
 
 - Pull down this repository: `git clone git@github.com:rrgayhart/sm-808-time.git`
