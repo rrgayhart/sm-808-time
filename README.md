@@ -47,3 +47,7 @@ Playing song at BPM: 128...
 - Try to keep external dependencies to a minimum.
 
 - The output isn't expected to be in sync with the tempo/BPM (bonus points if you manage to do it).
+
+## Resources Used
+
+Colors used in the commandline interface were pulled from [bodi0's](https://stackoverflow.com/users/632524/bodi0) [Stack Overflow response](https://stackoverflow.com/questions/9781218/how-to-change-node-jss-console-font-color)

@@ -10,6 +10,37 @@ describe('Song', function () {
     expect(this.subject.patterns).to.deep.equal({});
   });
 
+  it('is created with a title', function () {
+    this.subject = new Song('Dance!');
+    expect(this.subject.title).to.eq('Dance!');
+  });
+
+  it('is created with a default BPM', function () {
+    expect(this.subject.bpm).to.eq(128);
+  });
+
+  describe('validateBPM', function () {
+    it('converts a string to integer', function () {
+      var result = this.subject.validateBPM('133');
+      expect(result).to.eq(133);
+    });
+
+    it('throws not a number error if not valid integer', function () {
+      function result() { this.subject.validateBPM('sdfsd'); }
+      expect(result.bind(this)).to.throw(TypeError, /Not a number/);
+    });
+
+    it('throws an error if above reasonable bpm', function () {
+      function result() { this.subject.validateBPM(1000); }
+      expect(result.bind(this)).to.throw(TypeError, /BPM out of reasonable range/);
+    });
+
+    it('throws an error if bpm is 0', function () {
+      function result() { this.subject.validateBPM(0); }
+      expect(result.bind(this)).to.throw(TypeError, /BPM out of reasonable range/);
+    });
+  });
+
   describe('cleanPattern', function () {
     context('when pattern is an acceptable pattern length', function () {
       it('handles a pattern of 8 beats', function () {
