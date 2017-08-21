@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node commandline/index.js",
-    "test": "mocha ./tests/index.js || true",
+    "test": "node node_modules/.bin/mocha ./tests/index.js || true",
     "lint": "eslint index.js lib/. commandline/. tests/. || true",
     "lintf": "eslint index.js lib/. commandline/. tests/. --fix"
   },
